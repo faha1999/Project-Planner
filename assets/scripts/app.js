@@ -1,5 +1,5 @@
 class DOMHelper {
-  static clearEventListers(element) {
+  static clearEventListeners(element) {
     const clonedElement = element.cloneNode(true);
     element.replaceWith(clonedElement);
     return clonedElement;
@@ -89,7 +89,7 @@ class ProjectItem {
   connectSwitchButton(type) {
     const projectItemElement = document.getElementById(this.id);
     let switchBtn = projectItemElement.querySelector('button:last-of-type');
-    switchBtn = DOMHelper.clearEventListers(switchBtn);
+    switchBtn = DOMHelper.clearEventListeners(switchBtn);
     switchBtn.textContent = type === 'active' ? 'Finish' : 'Activate';
     switchBtn.addEventListener(
       'click',
@@ -97,9 +97,9 @@ class ProjectItem {
     );
   }
 
-  update(updateProjectListFn, type) {
-    this.updateProjectListsHandler = updateProjectListFn;
-    this.connectMoreInfoButton(type);
+  update(updateProjectListsFn, type) {
+    this.updateProjectListsHandler = updateProjectListsFn;
+    this.connectSwitchButton(type);
   }
 }
 
