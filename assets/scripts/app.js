@@ -152,7 +152,7 @@ class ProjectList {
   }
 
   switchProject(projectId) {
-    // const projectIndex = this.projects.findIndex((p) => p.id === projectId);
+    // const projectIndex = this.projects.findIndex(p => p.id === projectId);
     // this.projects.splice(projectIndex, 1);
     this.switchHandler(this.projects.find((p) => p.id === projectId));
     this.projects = this.projects.filter((p) => p.id !== projectId);
@@ -169,6 +169,21 @@ class App {
     finishedProjectsList.setSwitchHandlerFunction(
       activeProjectsList.addProject.bind(activeProjectsList)
     );
+
+    const timerId = setTimeout(this.startAnalytics, 3000);
+
+    document
+      .getElementById('stop-analytics-btn')
+      .addEventListener('click', () => {
+        clearTimeout(timerId);
+      });
+  }
+
+  static startAnalytics() {
+    const analyticsScript = document.createElement('script');
+    analyticsScript.src = 'assets/scripts/analytics.js';
+    analyticsScript.defer = true;
+    document.head.append(analyticsScript);
   }
 }
 
